@@ -27,30 +27,37 @@ export default function Login() {
   return (
     <SafeAreaView>
       <View style={{ height: "100%", alignItems: "center", backgroundColor: '#4a4848' }}>
-        <ImageBackground
-          source={backgroundImages[indexBackground].path}
-          resizeMode="contain"
-          style={{
-            width: 300,
-            height: 450,
-            opacity: 0.75,
-            marginTop: 15
-          }}
-        >
 
+        <ImageBackground source={backgroundImages[indexBackground].path} style={{width:"100%", height:"100%", backgroundColor:"red",alignItems:"center"}}>
+
+          <ImageBackground
+            source={backgroundImages[indexBackground].path}
+            resizeMode="contain"
+            style={{
+              flex: 2,
+              width: 300,
+              opacity: 0.75,
+              marginTop: 15
+            }}
+          >
+
+          </ImageBackground>
+
+          <View style={{ flex: 3 }}>
+            <TextInput placeholder="E-mail" keyboardType="email-address" style={{ width: 340, height: 65, marginTop: 10, backgroundColor: "#FFF", }}>
+            </TextInput>
+
+            <TextInput placeholder="Senha" keyboardType="visible-password" style={{ width: 340, height: 65, marginTop: 10, backgroundColor: "#FFF" }}>
+            </TextInput>
+
+            <TouchableOpacity
+              style={{ width: 340, height: 65, marginTop: 10, backgroundColor: "#FFF", justifyContent: "center", alignItems: "center" }}
+            >
+              <Text>Entrar</Text>
+            </TouchableOpacity>
+          </View>
         </ImageBackground>
 
-        <TextInput placeholder="E-mail" keyboardType="email-address" style={{ width: 340, height: 65, marginTop: 10, backgroundColor: "#FFF", }}>
-        </TextInput>
-
-        <TextInput placeholder="Senha" keyboardType="visible-password" style={{ width: 340, height: 65, marginTop: 10, backgroundColor: "#FFF" }}>
-        </TextInput>
-
-        <TouchableOpacity
-          style={{ width:340, height: 65, marginTop: 10, backgroundColor: "#FFF", justifyContent: "center", alignItems: "center" }}
-        >
-          <Text>Entrar</Text>
-        </TouchableOpacity>
 
 
       </View>
