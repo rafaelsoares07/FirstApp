@@ -52,12 +52,10 @@ export default function Login() {
       // await sound.playAsync();
       // setSound(sound);
     } catch (e) {
-      console.log(e)
+      
     }
 
   }
-
-  console.log(sound)
 
   const maxLengthImages = backgroundImages.length;
 
