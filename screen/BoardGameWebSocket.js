@@ -18,7 +18,7 @@ const App = () => {
 
     socketConnection.on("handleNumberOfClientsConected", (data) => {
       console.log("Mensagem recebida:", data);
-      setNumberClientsConected(data.length);
+      setNumberClientsConected(data);
     });
 
     socketConnection.on("update-mesagens", (data)=>{
@@ -45,7 +45,7 @@ const App = () => {
       <SafeAreaView style={{ flex: 1 }}>
         <View style={{ padding: 10, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
           <Avatar bgColor="$amber600" size="md" borderRadius="$full">
-            <AvatarFallbackText>Rafael Soares</AvatarFallbackText>
+            <AvatarFallbackText>I A</AvatarFallbackText>
           </Avatar>
           <View style={{ height: 30, width: 30, backgroundColor: "green", borderRadius: 50, justifyContent: "center", alignItems: "center", marginRight: 10 }}>
             <Text style={{ fontSize: 22, color: "#FFF", fontWeight: 600 }}>{numberClientesConected}</Text>

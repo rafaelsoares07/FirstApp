@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Audio } from 'expo-av';
 import { ImageBackground, TouchableWithoutFeedback, View, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FormControl, VStack, Heading, Input, InputField, InputIcon, InputSlot, EyeIcon, EyeOffIcon, ButtonText, Button, Text,ArrowLeftIcon, Icon } from "@gluestack-ui/themed"
+import { FormControl, VStack, Heading, Input, InputField, InputIcon, InputSlot, EyeIcon, EyeOffIcon, ButtonText, Button, Text, ArrowLeftIcon, Icon } from "@gluestack-ui/themed"
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios"
 
 
 
 export default function Login() {
+
   const navigation = useNavigation();
   const [sound, setSound] = useState();
   const [showPassword, setShowPassword] = useState(false)
@@ -15,7 +17,8 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [isSoundStarted, setIsSoundStarted] = useState(false);
   const [locationTouch, setLocationTouch] = useState(null);
-  const [finishAnimation, setFinishAnimation] = useState(true)
+  const [finishAnimation, setFinishAnimation] = useState(true);
+  const [userData, setUserData] = useState({})
 
   const backgroundImages = [
     { path: require("../assets/fundo1.png") },
@@ -52,7 +55,7 @@ export default function Login() {
       // await sound.playAsync();
       // setSound(sound);
     } catch (e) {
-      
+
     }
 
   }
@@ -71,6 +74,18 @@ export default function Login() {
     }
 
   }
+
+  async function userLoginAPI() {
+    try {
+  
+      const response = await axios.post("http://10.1.11.120:3000/signin",userData)
+      navigation.navigate("home")
+
+    } catch (error) {
+        alert(error.response.data)
+    }
+}
+
 
   return (
 
@@ -113,7 +128,7 @@ export default function Login() {
                       Email
                     </Text>
                     <Input>
-                      <InputField type="text" />
+                      <InputField type="text" onChangeText={(event) => setUserData({ ...userData, email: event })} />
                     </Input>
                   </VStack>
                   <VStack space="xs">
@@ -121,7 +136,7 @@ export default function Login() {
                       Password
                     </Text>
                     <Input textAlign="center">
-                      <InputField type={showPassword ? "text" : "password"} />
+                      <InputField type={showPassword ? "text" : "password"} onChangeText={(event) => setUserData({ ...userData, password: event })} />
                       <InputSlot pr="$3" onPress={handleState}>
                         {/* EyeIcon, EyeOffIcon are both imported from 'lucide-react-native' */}
                         <InputIcon
@@ -131,11 +146,11 @@ export default function Login() {
                       </InputSlot>
                     </Input>
                   </VStack>
-                  <Button variant="link" p="$0" size="sm" onPress={()=>{setSound(null); navigation.navigate("cadastro")}}>
+                  <Button variant="link" p="$0" size="sm" onPress={() => { setSound(null); navigation.navigate("cadastro") }}>
                     <ButtonText size="lg">Criar uma conta</ButtonText>
                   </Button>
 
-                  <Button size="sm" height={50} onPress={() => navigation.navigate("game")}>
+                  <Button size="sm" height={50} onPress={userLoginAPI}>
                     <ButtonText>{loading ? "Entrando..." : "Entrar"}</ButtonText>
                   </Button>
 
