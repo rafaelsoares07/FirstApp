@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, StatusBar } from "react-native";
-import { SafeAreaView, AvatarFallbackText, Avatar } from "@gluestack-ui/themed";
+import { SafeAreaView, AvatarFallbackText, Avatar, Button, ButtonText } from "@gluestack-ui/themed";
 import io from "socket.io-client";
 import ChatScreen from "./ChatScreen";
 
@@ -21,7 +21,7 @@ const App = () => {
       setNumberClientsConected(data);
     });
 
-    socketConnection.on("update-mesagens", (data)=>{
+    socketConnection.on("update-mesagens", (data) => {
       console.log(data)
       setMessages(data)
     })
@@ -38,9 +38,14 @@ const App = () => {
     };
   }, []);
 
+  const handleEntrarClick = () => {
+    // Emitir um evento para se conectar com outro usuário
+    socket.emit("conectar-na-fila", "enviei solicitacao");
+  };
+
   return (
     <>
-    
+
       <StatusBar hidden />
       <SafeAreaView style={{ flex: 1 }}>
         <View style={{ padding: 10, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
@@ -51,7 +56,11 @@ const App = () => {
             <Text style={{ fontSize: 22, color: "#FFF", fontWeight: 600 }}>{numberClientesConected}</Text>
           </View>
         </View>
-        <ChatScreen socket={socket} msg={messages}/>
+
+        <Button size="sm" height={50} onPress={handleEntrarClick}>
+          <ButtonText>Entrar</ButtonText>
+        </Button>
+        {/* <ChatScreen socket={socket} msg={messages}/> */}
       </SafeAreaView>
     </>
   );

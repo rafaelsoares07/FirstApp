@@ -79,7 +79,7 @@ export default function Login() {
     try {
   
       const response = await axios.post("http://10.1.11.120:3000/signin",userData)
-      navigation.navigate("home")
+      navigation.navigate("game")
 
     } catch (error) {
         alert(error.response.data)
